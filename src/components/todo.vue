@@ -48,16 +48,18 @@ export default {
         method: "POST",
         body: JSON.stringify({ title: this.message }),
       })
-        .then(() => {
-          this.setData(this.message);
-          return (this.message = "");
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          this.setData(res);
         })
         .catch((err) => {
           console.error(err.message);
         });
     },
     setData: function (data) {
-      this.dat.push({ title: data });
+      this.dat.push(data);
     },
     deleteTodo: function (name, index) {
       let cookies = document.cookie.split("; ").map((a) => a.split("="));

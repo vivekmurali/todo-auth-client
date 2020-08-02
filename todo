@@ -1,7 +1,9 @@
 [x] cookies
-[] create todo add all the info to the object
+[x] create todo add all the info to the object
 [] styling
-[] register
+[x] register
 [] edit
 [x] delete
 [x] logout
+[/] Add HTTP only to cookies
+[] Add done to todo

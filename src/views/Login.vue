@@ -37,7 +37,8 @@ export default {
         })
         .then((res) => {
           this.auth = res.token;
-          this.$cookies.set("token", this.auth, );
+          this.$cookies.set("token", this.auth,"2d");
+          // document.cookie=`token=${this.auth}; HttpOnly`;
           this.$router.push({ name: "todo", params: { token: this.auth } });
         });
     },
