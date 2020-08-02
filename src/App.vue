@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <b-button to="/" type="is-link">home</b-button>|
+      <b-button to="/login" type="is-link">login</b-button>|
+      <b-button @click="logout()">logout</b-button>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  methods: {
+    logout: function () {
+      console.log("logout");
+      document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
 
 <style>
@@ -23,6 +28,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
