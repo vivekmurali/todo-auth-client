@@ -1,8 +1,24 @@
 <template>
-  <div class="home">
-    <input type="text" name="email" placeholder="Email" autocomplete="off" v-model="email" />
-    <input type="password" name="password" placeholder="Password" v-model="password" />
-    <input type="submit" @click.once="register()" />
+  <div class="container">
+    <h1 class="display1">Register</h1>
+    <b-form>
+      <b-form-input
+        type="text"
+        name="email"
+        placeholder="Email"
+        autocomplete="off"
+        v-model="email"
+        class="mt-1"
+      />
+      <b-form-input
+        class="mt-1"
+        type="password"
+        name="password"
+        placeholder="Password"
+        v-model="password"
+      />
+      <b-button id="register-btn" class="m-1" variant="primary" @click.once="register()">Submit</b-button>
+    </b-form>
   </div>
 </template>
 
@@ -18,6 +34,8 @@ export default {
   },
   methods: {
     register: function () {
+      document.getElementById("register-btn").disabled = true;
+      if (this.email == "" || this.password == "") return;
       fetch("http://localhost:3000/register", {
         method: "POST",
         redirect: "follow",
@@ -27,7 +45,7 @@ export default {
         body: JSON.stringify({ email: this.email, password: this.password }),
       }).then((res) => {
         if (res.status == 200) {
-            this.$router.push('/login');
+          this.$router.push("/login");
         } else {
           this.email = "";
           this.password = "";

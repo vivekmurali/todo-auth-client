@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="title">Hello World!</h1>
-    <h2 class="subtitle">I am Vivek</h2>
     <b-form-input
       type="text"
-      class="mb-4"
+      class="mt-4 mb-4"
       id="input-box"
       minlength="3"
       v-model="message"
@@ -12,10 +10,15 @@
       @keydown.enter="newNote()"
     />
     <b-list-group>
-      <b-list-group-item v-for="(name, index) in dat" :key="name._id">
-        {{name.title}}
-        <b-button class="float-right" size="sm" variant="danger" @click="deleteTodo(name, index)">X</b-button>
-      </b-list-group-item>
+      <transition-group name="slideRight">
+        <b-list-group-item v-for="(name, index) in dat" :key="name._id">
+          <b-form-checkbox class="float-left" @change="toggle(name, index)" :checked="name.done" />
+          {{name.title}}
+          <b-button class="float-right" size="sm" variant="danger" @click="deleteTodo(name, index)">
+            <b-icon icon="trash" />
+          </b-button>
+        </b-list-group-item>
+      </transition-group>
     </b-list-group>
   </div>
 </template>
@@ -36,6 +39,20 @@ export default {
     hello: function () {
       console.log("hello");
     },
+    toggle: function (name, index) {
+      let cookies = document.cookie.split("; ").map((a) => a.split("="));
+      let object = Object.fromEntries(cookies);
+      this.dat[index].done = !this.dat[index].done;
+      fetch("http://localhost:3000/notes/edit/" + this.dat[index]._id, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json, text,plain, */*",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${object.token}`,
+        },
+        body: JSON.stringify({ done: this.dat[index].done }),
+      });
+    },
     newNote: function () {
       let cookies = document.cookie.split("; ").map((a) => a.split("="));
       let object = Object.fromEntries(cookies);
@@ -53,6 +70,7 @@ export default {
         })
         .then((res) => {
           this.setData(res);
+          this.message = "";
         })
         .catch((err) => {
           console.error(err.message);

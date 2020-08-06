@@ -1,27 +1,56 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <b-button to="/" type="is-link">home</b-button>|
-      <b-button to="/login" type="is-link">login</b-button>|
-      <b-button to="/register" type="is-link">Register</b-button>|
-      <b-button @click="logout()">logout</b-button>
-    </div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item class="m-1" to="/" data-toggle="collapse" type="is-link">home</b-nav-item>
+          <b-nav-item
+            class="m-1"
+            to="/login"
+            data-toggle="collapse"
+            v-if="!this.log"
+            type="is-link"
+          >login</b-nav-item>
+          <b-nav-item
+            class="m-1"
+            to="/register"
+            data-toggle="collapse"
+            v-if="!this.log"
+            type="is-link"
+          >Register</b-nav-item>
+          <b-nav-item class="m-1" data-toggle="collapse" v-if="this.log" @click="logout()">logout</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      log: false,
+    };
+  },
   methods: {
     logout: function () {
-      console.log("logout");
       let cookies = document.cookie.split("; ").map((a) => a.split("="));
       let object = Object.fromEntries(cookies);
       if (object.token) {
         document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+        this.log = false;
         this.$router.push("/login");
       }
     },
+  },
+  updated: function () {
+    let cookies = document.cookie.split("; ").map((a) => a.split("="));
+    let object = Object.fromEntries(cookies);
+    if (object.token) {
+      this.log = true;
+    }
   },
 };
 </script>

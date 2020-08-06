@@ -1,8 +1,23 @@
 <template>
-  <div class="home">
-    <input type="text" name="email" placeholder="Email" autocomplete="off" v-model="email" />
-    <input type="password" name="password" placeholder="Password" v-model="password" />
-    <input type="submit" @click.once="login()" />
+  <div class="container">
+    <h1 class="display1">Login</h1>
+    <b-form-input
+      type="text"
+      name="email"
+      placeholder="Email"
+      autocomplete="off"
+      v-model="email"
+      class="mt-1"
+    />
+    <b-form-input
+      class="mt-1"
+      type="password"
+      name="password"
+      placeholder="Password"
+      v-model="password"
+      @keydown.enter.once="login()"
+    />
+    <b-button id="login-btn" class="m-1" variant="primary" @click.once="login()">Submit</b-button>
   </div>
 </template>
 
@@ -18,6 +33,8 @@ export default {
   },
   methods: {
     login: function () {
+      document.getElementById("login-btn").disabled = true;
+      if (this.email == "" || this.password == "") return;
       fetch("http://localhost:3000/login", {
         method: "POST",
         redirect: "follow",
@@ -28,7 +45,6 @@ export default {
       })
         .then((res) => {
           if (res.status == 200) {
-            console.log("logged in");
             return res.json();
           } else {
             this.email = "";
@@ -37,7 +53,7 @@ export default {
         })
         .then((res) => {
           this.auth = res.token;
-          this.$cookies.set("token", this.auth,"2d");
+          this.$cookies.set("token", this.auth, "2d");
           // document.cookie=`token=${this.auth}; HttpOnly`;
           this.$router.push({ name: "todo", params: { token: this.auth } });
         });

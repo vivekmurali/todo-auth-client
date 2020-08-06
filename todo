@@ -6,4 +6,5 @@
 [x] delete
 [x] logout
 [/] Add HTTP only to cookies
-[] Add done to todo
+[x] Add done to todo
+[x] Show logout only if logged in
