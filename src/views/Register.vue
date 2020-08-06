@@ -36,7 +36,7 @@ export default {
     register: function () {
       document.getElementById("register-btn").disabled = true;
       if (this.email == "" || this.password == "") return;
-      fetch("http://localhost:3000/register", {
+      fetch("https://api.vivekmurali.tech/register", {
         method: "POST",
         redirect: "follow",
         headers: {

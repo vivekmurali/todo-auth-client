@@ -43,7 +43,7 @@ export default {
       let cookies = document.cookie.split("; ").map((a) => a.split("="));
       let object = Object.fromEntries(cookies);
       this.dat[index].done = !this.dat[index].done;
-      fetch("http://localhost:3000/notes/edit/" + this.dat[index]._id, {
+      fetch("https://api.vivekmurali.tech/notes/edit/" + this.dat[index]._id, {
         method: "PUT",
         headers: {
           Accept: "application/json, text,plain, */*",
@@ -56,7 +56,7 @@ export default {
     newNote: function () {
       let cookies = document.cookie.split("; ").map((a) => a.split("="));
       let object = Object.fromEntries(cookies);
-      fetch("http://localhost:3000/notes/new", {
+      fetch("https://api.vivekmurali.tech/notes/new", {
         headers: {
           Accept: "application/json, text,plain, */*",
           "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default {
     deleteTodo: function (name, index) {
       let cookies = document.cookie.split("; ").map((a) => a.split("="));
       let object = Object.fromEntries(cookies);
-      fetch("http://localhost:3000/notes/delete/" + this.dat[index]._id, {
+      fetch("https://api.vivekmurali.tech/notes/delete/" + this.dat[index]._id, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${object.token}`,
@@ -100,7 +100,7 @@ export default {
     if (!object.token) {
       this.$router.push("/login");
     } else {
-      fetch("http://localhost:3000/notes", {
+      fetch("https://api.vivekmurali.tech/notes", {
         headers: {
           Authorization: `Bearer ${object.token}`,
         },
