@@ -37,7 +37,7 @@ export default {
     login: function () {
       document.getElementById("login-btn").disabled = true;
       if (this.email == "" || this.password == "") return;
-      fetch("https:/api.vivekmurali.tech/login", {
+      fetch("https://api.vivekmurali.tech/login", {
         method: "POST",
         redirect: "follow",
         headers: {
