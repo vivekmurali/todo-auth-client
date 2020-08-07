@@ -5,19 +5,21 @@
       <b-form-input
         type="text"
         name="email"
-        placeholder="Email"
+        placeholder="Username"
         autocomplete="off"
         v-model="email"
-        class="mt-1"
+        class="mt-3"
+        style="width: 50%; margin: auto;"
       />
       <b-form-input
-        class="mt-1"
+        class="mt-3"
         type="password"
         name="password"
         placeholder="Password"
         v-model="password"
+        style="width: 50%; margin: auto;"
       />
-      <b-button id="register-btn" class="m-1" variant="primary" @click.once="register()">Submit</b-button>
+      <b-button id="register-btn" class="m-3" variant="primary" @click.once="register()">Submit</b-button>
     </b-form>
   </div>
 </template>

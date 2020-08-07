@@ -52,6 +52,13 @@ export default {
       this.log = true;
     }
   },
+  mounted: function () {
+    let cookies = document.cookie.split("; ").map((a) => a.split("="));
+    let object = Object.fromEntries(cookies);
+    if (object.token) {
+      this.log = true;
+    }
+  },
 };
 </script>
 

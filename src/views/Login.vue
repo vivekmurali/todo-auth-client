@@ -4,20 +4,22 @@
     <b-form-input
       type="text"
       name="email"
-      placeholder="Email"
+      placeholder="Username"
       autocomplete="off"
       v-model="email"
-      class="mt-1"
+      class="mt-3"
+      style="width: 50%; margin: auto;"
     />
     <b-form-input
-      class="mt-1"
+      class="mt-3"
       type="password"
       name="password"
       placeholder="Password"
       v-model="password"
+      style="width: 50%; margin: auto;"
       @keydown.enter.once="login()"
     />
-    <b-button id="login-btn" class="m-1" variant="primary" @click.once="login()">Submit</b-button>
+    <b-button id="login-btn" class="m-3" variant="primary" @click.once="login()">Submit</b-button>
   </div>
 </template>
 

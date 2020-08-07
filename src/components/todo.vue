@@ -6,11 +6,11 @@
       id="input-box"
       minlength="3"
       v-model="message"
-      :placeholder="hi"
+      :placeholder="Task"
       @keydown.enter="newNote()"
     />
     <b-list-group>
-      <transition-group name="slideRight">
+      <transition-group name="fadeDown">
         <b-list-group-item v-for="(name, index) in dat" :key="name._id">
           <b-form-checkbox class="float-left" @change="toggle(name, index)" :checked="name.done" />
           {{name.title}}
@@ -29,7 +29,7 @@ export default {
   name: "todo",
   data() {
     return {
-      hi: "hello",
+      Task: "Add new Task",
       message: "",
       dat: [],
       token: "",
@@ -82,12 +82,15 @@ export default {
     deleteTodo: function (name, index) {
       let cookies = document.cookie.split("; ").map((a) => a.split("="));
       let object = Object.fromEntries(cookies);
-      fetch("https://api.vivekmurali.tech/notes/delete/" + this.dat[index]._id, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${object.token}`,
-        },
-      })
+      fetch(
+        "https://api.vivekmurali.tech/notes/delete/" + this.dat[index]._id,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${object.token}`,
+          },
+        }
+      )
         .then(() => {
           this.dat.splice(index, 1);
         })
