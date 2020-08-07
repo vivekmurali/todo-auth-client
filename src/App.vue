@@ -4,14 +4,14 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item class="m-1" to="/" data-toggle="collapse" type="is-link">home</b-nav-item>
+          <b-nav-item class="m-1" to="/" data-toggle="collapse" type="is-link">Home</b-nav-item>
           <b-nav-item
             class="m-1"
             to="/login"
             data-toggle="collapse"
             v-if="!this.log"
             type="is-link"
-          >login</b-nav-item>
+          >Login</b-nav-item>
           <b-nav-item
             class="m-1"
             to="/register"
@@ -19,7 +19,7 @@
             v-if="!this.log"
             type="is-link"
           >Register</b-nav-item>
-          <b-nav-item class="m-1" data-toggle="collapse" v-if="this.log" @click="logout()">logout</b-nav-item>
+          <b-nav-item class="m-1" data-toggle="collapse" v-if="this.log" @click="logout()">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

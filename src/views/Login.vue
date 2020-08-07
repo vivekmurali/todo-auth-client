@@ -2,26 +2,37 @@
   <div class="container">
     <h1 class="display1">Login</h1>
     <b-form-input
+      id="input-custom"
       type="text"
       name="email"
       placeholder="Username"
       autocomplete="off"
       v-model="email"
       class="mt-3"
-      style="width: 50%; margin: auto;"
     />
     <b-form-input
+      id="input-custom"
       class="mt-3"
       type="password"
       name="password"
       placeholder="Password"
       v-model="password"
-      style="width: 50%; margin: auto;"
       @keydown.enter.once="login()"
     />
     <b-button id="login-btn" class="m-3" variant="primary" @click.once="login()">Submit</b-button>
   </div>
 </template>
+<style>
+#input-custom {
+  width: 50%;
+  margin: auto;
+}
+@media (max-width: 768px) {
+  #input-custom {
+    width: 75%;
+  }
+}
+</style>
 
 <script>
 export default {

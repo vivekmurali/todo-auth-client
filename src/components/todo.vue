@@ -11,7 +11,11 @@
     />
     <b-list-group>
       <transition-group name="fadeDown">
-        <b-list-group-item v-for="(name, index) in dat" :key="name._id">
+        <b-list-group-item
+          v-for="(name, index) in dat"
+          :key="name._id"
+          :class="{ strike: name.done}"
+        >
           <b-form-checkbox class="float-left" @change="toggle(name, index)" :checked="name.done" />
           {{name.title}}
           <b-button class="float-right" size="sm" variant="danger" @click="deleteTodo(name, index)">
@@ -33,6 +37,7 @@ export default {
       message: "",
       dat: [],
       token: "",
+      isActive: false,
     };
   },
   methods: {
@@ -123,3 +128,10 @@ export default {
   },
 };
 </script>
+<style>
+.strike {
+  text-decoration: line-through;
+  transition: 0.2s;
+  color: grey;
+}
+</style>

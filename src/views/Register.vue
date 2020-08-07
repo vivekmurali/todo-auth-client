@@ -3,6 +3,7 @@
     <h1 class="display1">Register</h1>
     <b-form>
       <b-form-input
+        id="input-custom"
         type="text"
         name="email"
         placeholder="Username"
@@ -12,6 +13,7 @@
         style="width: 50%; margin: auto;"
       />
       <b-form-input
+        id="input-custom"
         class="mt-3"
         type="password"
         name="password"
@@ -23,6 +25,18 @@
     </b-form>
   </div>
 </template>
+
+<style>
+#input-custom {
+  width: 50%;
+  margin: auto;
+}
+@media (max-width: 768px) {
+  #input-custom {
+    width: 75%;
+  }
+}
+</style>
 
 <script>
 export default {
